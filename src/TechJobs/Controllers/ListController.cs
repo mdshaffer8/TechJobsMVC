@@ -21,14 +21,17 @@ namespace TechJobs.Controllers
             columnChoices.Add("all", "All");
         }
 
+        //displays the different types of lists that the user can view
         public IActionResult Index()
         {
             ViewBag.columns = columnChoices;
             return View();
         }
 
+        //in the Values action, the controller uses the query parameter passed in as column to determine which values to fetch from JobData.
         public IActionResult Values(string column)
         {
+            //will fetch all job data then render the Jobs.cshtml view template rather than the default view
             if (column.Equals("all"))
             {
                 List<Dictionary<string, string>> jobs = JobData.FindAll();
@@ -36,6 +39,7 @@ namespace TechJobs.Controllers
                 ViewBag.jobs = jobs;
                 return View("Jobs");
             }
+            //fetches only the values for the given column and passes them to the Values.cshtml view template (default)
             else
             {
                 List<string> items = JobData.FindAll(column);
@@ -46,6 +50,7 @@ namespace TechJobs.Controllers
             }
         }
 
+        //in the Jobs action, we take in two query parameters: column and value. We are searching for a particular value within a particular column and displaying jobs that match.
         public IActionResult Jobs(string column, string value)
         {
             List<Dictionary<String, String>> jobs = JobData.FindByColumnAndValue(column, value);

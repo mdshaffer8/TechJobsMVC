@@ -1,4 +1,7 @@
-﻿<h1>@ViewBag.title</h1>
+﻿@using TechJobs.Models;
+
+
+<h1>@ViewBag.title</h1>
 
 <form action="/Search/Results">
     <h2>Search by:</h2>
@@ -10,8 +13,8 @@
                 <input type="radio"
                        name="searchType"
                        id="@column.Key"
-                       value="@column.Key" 
-                       checked="@column.Key == 'all''"/>
+                       value="@column.Key"
+                       checked="@column.Key == 'all''" />
                 <label for="@column.Key">@column.Value</label>
             </span>
         }
@@ -32,5 +35,29 @@
 
     <h3>@ViewBag.jobs.Count Result(s)</h3>
 
-    // TODO #2 - Loop over jobs dictionary and display all job fields 
+    // TODO #2 - Loop over jobs dictionary and display all job fields
+
+
+
+    @foreach (Dictionary<string, string> column in ViewBag.jobs)
+    {
+
+        <table class="job-listing">
+
+            @foreach (KeyValuePair<string, string> item in column)
+
+            {
+
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                </tr>
+
+            }
+
+        </table>
+
+    }
+
+
 }

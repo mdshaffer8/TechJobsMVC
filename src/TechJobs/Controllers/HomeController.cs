@@ -5,6 +5,7 @@ namespace TechJobs.Controllers
 {
     public class HomeController : Controller
     {
+        //action method displays the home page for the app
         public IActionResult Index()
         {
             Dictionary<string, string> actionChoices = new Dictionary<string, string>();

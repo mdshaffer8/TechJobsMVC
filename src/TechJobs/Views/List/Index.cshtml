@@ -1,9 +1,20 @@
 ﻿<h1>@ViewBag.Title</h1>
 <h2>View All</h2>
+
+@*// displays the list options, using data from the columnChoices dictionary passed in via ViewBag.columns*@
+
 <ul>
-    @foreach (KeyValuePair<string, string> column in ViewBag.columns) {
+    @foreach (KeyValuePair<string, string> column in ViewBag.columns)
+    {
         <li>
             <a asp-controller="List" asp-action="Values" asp-route-column="@column.Key">@column.Value</a>
         </li>
     }
 </ul>
+
+@*  // The asp-route-* attribute will add a query parameter with a key equal to whatever the third slot of the attribute name is.
+    // The * is a placeholder that we can replace with any valid identifier.
+    // We specify a query parameter named column by using asp-route-column.
+    // The value of the query parameter is determined dynamically based on the value of @column.Key
+    // Since these values come from ViewBag.columns in the template (which in turn comes from columnChoices in the controller), they will be employer, location, etc.
+    // When the user clicks on these links, they will be routed to the Values action in the List controller, which looks for these parameters *@ 
