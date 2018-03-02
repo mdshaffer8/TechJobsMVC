@@ -33,6 +33,6 @@ namespace TechJobs.Controllers
             // passing the search results into Views/Search/Index.cshtml
             return View("Index");
 
-        }
+        } 
     }
 }
